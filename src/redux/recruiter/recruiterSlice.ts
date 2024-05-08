@@ -96,6 +96,7 @@ const recruiterSlice = createSlice({
         const loginData = action.payload.data;
         toast.success(action.payload.message);
         localStorage.setItem("isLoggedIn", "Yes");
+        localStorage.setItem("loggedInUserId", loginData._id);
         state.userData = loginData;
       })
 

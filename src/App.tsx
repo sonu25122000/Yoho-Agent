@@ -4,6 +4,7 @@ import { Login } from "./page/auth/login";
 import Loader from "./utils/Loader";
 import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./page/dashboard/Dashboard";
+import { HistoryTable } from "./page/history/History";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
@@ -31,6 +32,7 @@ function App() {
         />
 
         <Route path="/auth/sign-in" element={<Login />} />
+        <Route path="/history" element={<HistoryTable />} />
       </Routes>
     </>
   );
