@@ -20,7 +20,7 @@ export function DashBoardCard(props: any) {
 
       {props.buttonContent1 && (
         <button
-          onClick={props.handleOpenModal}
+          onClick={props.handleOpenModal1}
           type="button"
           className="text-gray-900 bg-white border border-black focus:outline-none hover:bg-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-black-800 dark:text-black dark:border-black dark:hover:bg-black-700 dark:hover:border-black "
         >

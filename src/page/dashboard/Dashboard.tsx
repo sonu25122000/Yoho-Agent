@@ -12,11 +12,15 @@ import { DashBoardCard } from "../../component/card/Card";
 import { GiTwoCoins } from "react-icons/gi";
 import { FaUser } from "react-icons/fa";
 import PageHeader from "../../component/pageHeader/PageHeader";
+import SellRecharge from "../../component/recharge/SellRecharge";
+import Modal1 from "../../component/modal/Modal1";
 
 const DashBoard: React.FC = () => {
   const token = localStorage.getItem("token");
   const loggedInUserId = localStorage.getItem("loggedInUserId");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+
   const [recruiterProfile, setRecruiterProfile] = useState<any>({});
   const [requestedRecharge, setRequestedRecharge] = useState<any>([]);
   const [requestedRechargeSellType, setRequestedRechargeSellType] =
@@ -27,6 +31,14 @@ const DashBoard: React.FC = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const openModal1 = () => {
+    setIsModalOpen1(true);
+  };
+
+  const closeModal1 = () => {
+    setIsModalOpen1(false);
   };
   // get superadmin profile list
   const getRecruiterProfileDetails = async () => {
@@ -83,6 +95,7 @@ const DashBoard: React.FC = () => {
             icon={<GiTwoCoins size="20" />}
             buttonContent="Recharge"
             handleOpenModal={openModal}
+            handleOpenModal1={openModal1}
             buttonContent1="Recharge to customer"
             heading="My Coin"
             coin={(recruiterProfile && recruiterProfile.coin) || "No Coin"}
@@ -95,6 +108,16 @@ const DashBoard: React.FC = () => {
             >
               <Recharge closeModal={closeModal} />
             </Modal>
+          )}
+
+          {isModalOpen1 && (
+            <Modal1
+              closeModal={closeModal1}
+              handleOpen={openModal1}
+              isModalOpen={isModalOpen1}
+            >
+              <SellRecharge closeModal={closeModal1} />
+            </Modal1>
           )}
         </div>
         <DashBoardCard
@@ -148,9 +171,13 @@ const DashBoard: React.FC = () => {
           ? requestedRechargeSellType.map((item: any) => {
               return (
                 <RechargeHistoryCard
-                  name={`${item.recruiterID.firstName}${" "}${
-                    item.recruiterID.lastName
-                  }`}
+                  name={
+                    item.fullName
+                      ? item.fullName
+                      : `${item.recruiterID.firstName}${" "}${
+                          item.recruiterID.lastName
+                        }`
+                  }
                   recruiterID={item.recruiterID._id}
                   adminID={item.adminID}
                   phoneNumber={item.recruiterID.phoneNumber}
