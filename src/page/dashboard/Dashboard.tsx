@@ -15,17 +15,21 @@ import PageHeader from "../../component/pageHeader/PageHeader";
 import SellRecharge from "../../component/recharge/SellRecharge";
 import Modal1 from "../../component/modal/Modal1";
 import { CoinValue } from "../../utils/coinValue";
+import WithDrawCommission from "../../component/modal/withdrawModal";
+import WithDraw from "../../component/recharge/Withdraw";
 
 const DashBoard: React.FC = () => {
   const token = localStorage.getItem("token");
   const loggedInUserId = localStorage.getItem("loggedInUserId");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const [isModalOpen2, setIsModalOpen2] = useState(false);
 
   const [recruiterProfile, setRecruiterProfile] = useState<any>({});
   const [requestedRecharge, setRequestedRecharge] = useState<any>([]);
   const [requestedRechargeSellType, setRequestedRechargeSellType] =
     useState<any>([]);
+  const [withdrawType, SetwithdrawType] = useState<any>([]);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -40,6 +44,14 @@ const DashBoard: React.FC = () => {
 
   const closeModal1 = () => {
     setIsModalOpen1(false);
+  };
+
+  const openModal2 = () => {
+    setIsModalOpen2(true);
+  };
+
+  const closeModal2 = () => {
+    setIsModalOpen2(false);
   };
   // get superadmin profile list
   const getRecruiterProfileDetails = async () => {
@@ -73,9 +85,12 @@ const DashBoard: React.FC = () => {
       const sellTypeRecharge = res.data.data.filter(
         (el: any) => el.purchaseType == "sell"
       );
+      const withdrawType = res.data.data.filter(
+        (el: any) => el.purchaseType == "withdraw"
+      );
       setRequestedRecharge(buyTypeRecharge);
       setRequestedRechargeSellType(sellTypeRecharge);
-
+      SetwithdrawType(withdrawType);
       console.log(res.data.data);
     } catch (error: any) {
       console.log(error);
@@ -139,6 +154,8 @@ const DashBoard: React.FC = () => {
         <DashBoardCard
           Icon1={<SiSololearn size="40" className="dark:text-white" />}
           icon={<SiSololearn size="20" />}
+          buttonContent="Withdraw"
+          handleOpenModal={openModal2}
           coin={
             (recruiterProfile &&
               recruiterProfile.unlockCommission +
@@ -149,6 +166,15 @@ const DashBoard: React.FC = () => {
           }
           heading="Commision Unlocked"
         />
+        {isModalOpen2 && (
+          <WithDrawCommission
+            closeModal={closeModal2}
+            handleOpen={openModal2}
+            isModalOpen={isModalOpen2}
+          >
+            <WithDraw closeModal={closeModal2} />
+          </WithDrawCommission>
+        )}
       </div>
 
       <PageHeader pageName="Recharge Requested For Buy" />
@@ -176,6 +202,32 @@ const DashBoard: React.FC = () => {
       <div className="grid-cols-1 grid md:grid-cols-3 gap-4">
         {requestedRechargeSellType
           ? requestedRechargeSellType.map((item: any) => {
+              return (
+                <RechargeHistoryCard
+                  name={
+                    item.fullName
+                      ? item.fullName
+                      : `${item.recruiterID.firstName}${" "}${
+                          item.recruiterID.lastName
+                        }`
+                  }
+                  recruiterID={item.recruiterID._id}
+                  adminID={item.adminID}
+                  phoneNumber={item.recruiterID.phoneNumber}
+                  amount={item.amount}
+                  coin={item.coin}
+                  id={item._id}
+                  purchaseDate={item.createdAt}
+                />
+              );
+            })
+          : "abc"}
+      </div>
+
+      <PageHeader pageName="Withdraw Requested" />
+      <div className="grid-cols-1 grid md:grid-cols-3 gap-4">
+        {withdrawType
+          ? withdrawType.map((item: any) => {
               return (
                 <RechargeHistoryCard
                   name={
