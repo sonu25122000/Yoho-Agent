@@ -141,7 +141,8 @@ const DashBoard: React.FC = () => {
           icon={<SiSololearn size="20" />}
           coin={
             (recruiterProfile &&
-              recruiterProfile.totalCommissionEarned +
+              recruiterProfile.totalCommissionEarned &&
+              recruiterProfile.totalCommissionEarned.toFixed(2) +
                 " = " +
                 (recruiterProfile.totalCommissionEarned * CoinValue).toFixed(
                   2
@@ -158,7 +159,8 @@ const DashBoard: React.FC = () => {
           handleOpenModal={openModal2}
           coin={
             (recruiterProfile &&
-              recruiterProfile.unlockCommission +
+              recruiterProfile.unlockCommission &&
+              recruiterProfile.unlockCommission.toFixed(2) +
                 " = " +
                 (recruiterProfile.unlockCommission * CoinValue).toFixed(2) +
                 " Rs") ||
