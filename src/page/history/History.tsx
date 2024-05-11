@@ -18,6 +18,7 @@ const TABLE_HEAD = [
   "Phone Number",
   "Coin",
   "Commision",
+  "Amount",
   "Purchase Type",
   "Recharge Status",
 ];
@@ -114,13 +115,19 @@ export function HistoryTable() {
                       </td>
 
                       <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
+                        <p className="text-black dark:text-white">
+                          {(item.amount && item.amount.toFixed(2)) || 0}
+                        </p>
+                      </td>
+
+                      <td className="border-b border-[#eee] py-5 px-4 dark:border-strokedark">
                         <div className="w-max">
                           <Chip
                             size="sm"
                             // purchaseType
                             className=""
                             value={item.purchaseType}
-                            color={"blue"}
+                            color={item.purchaseType == "buy" ? "blue" : "red"}
                           />
                         </div>
                       </td>
@@ -159,7 +166,7 @@ export function HistoryTable() {
             <Button
               disabled={page <= 1}
               onClick={() => setPage(page - 1)}
-              className="dark:text-white border text-black"
+              className="text-white bg-primary border border-black"
               size="sm"
             >
               Previous

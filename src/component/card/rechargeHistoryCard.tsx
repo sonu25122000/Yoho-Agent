@@ -8,7 +8,7 @@ export function RechargeHistoryCard({
   id,
   name,
   phoneNumber,
-  YohoId,
+  amount,
   coin,
   purchaseDate,
   adminID,
@@ -30,7 +30,7 @@ export function RechargeHistoryCard({
         </h5>
 
         <h5 className="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-          YOHOID : {YohoId}
+          Amount : {(amount && amount) || 0}
         </h5>
 
         <h5 className="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">

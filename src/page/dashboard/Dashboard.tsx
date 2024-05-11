@@ -14,6 +14,7 @@ import { FaUser } from "react-icons/fa";
 import PageHeader from "../../component/pageHeader/PageHeader";
 import SellRecharge from "../../component/recharge/SellRecharge";
 import Modal1 from "../../component/modal/Modal1";
+import { CoinValue } from "../../utils/coinValue";
 
 const DashBoard: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -124,23 +125,29 @@ const DashBoard: React.FC = () => {
           Icon1={<SiSololearn size="40" className="dark:text-white" />}
           icon={<SiSololearn size="20" />}
           coin={
-            (recruiterProfile && recruiterProfile.commissionEarned) ||
-            "No Commission"
+            (recruiterProfile &&
+              recruiterProfile.totalCommissionEarned +
+                " = " +
+                (recruiterProfile.totalCommissionEarned * CoinValue).toFixed(
+                  2
+                ) +
+                " Rs") ||
+            "No Commission Earned"
           }
           heading="Commision Earned"
         />
-
         <DashBoardCard
-          coin="300"
-          heading="Today's Sell"
-          Icon1={<FaUser size="40" className="dark:text-white" />}
-          icon={<FaUser size="20" />}
-        />
-        <DashBoardCard
-          coin="300"
-          heading="Monthly Sells"
-          Icon1={<FaUser size="40" className="dark:text-white" />}
-          icon={<FaUser size="20" />}
+          Icon1={<SiSololearn size="40" className="dark:text-white" />}
+          icon={<SiSololearn size="20" />}
+          coin={
+            (recruiterProfile &&
+              recruiterProfile.unlockCommission +
+                " = " +
+                (recruiterProfile.unlockCommission * CoinValue).toFixed(2) +
+                " Rs") ||
+            "No unlocked commission"
+          }
+          heading="Commision Unlocked"
         />
       </div>
 
@@ -156,7 +163,7 @@ const DashBoard: React.FC = () => {
                   recruiterID={item.recruiterID._id}
                   adminID={item.adminID}
                   phoneNumber={item.recruiterID.phoneNumber}
-                  YohoId={item.YohoId}
+                  amount={item.amount}
                   coin={item.coin}
                   id={item._id}
                   purchaseDate={item.createdAt}
@@ -181,7 +188,7 @@ const DashBoard: React.FC = () => {
                   recruiterID={item.recruiterID._id}
                   adminID={item.adminID}
                   phoneNumber={item.recruiterID.phoneNumber}
-                  YohoId={item.YohoId}
+                  amount={item.amount}
                   coin={item.coin}
                   id={item._id}
                   purchaseDate={item.createdAt}

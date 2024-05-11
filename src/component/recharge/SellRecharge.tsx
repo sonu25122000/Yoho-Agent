@@ -1,14 +1,15 @@
-import { GiTwoCoins } from "react-icons/gi";
 import { baseUrl } from "../../utils/baseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { CoinValue } from "../../utils/coinValue";
 
 const SellRecharge = ({ closeModal }: any) => {
   const [payload, setPayload] = useState({
     fullName: "",
     YohoId: "",
     coin: "",
+    phoneNumber: "",
   });
   const handleChange1 = (e: any) => {
     const { name, value } = e.target;
@@ -17,11 +18,10 @@ const SellRecharge = ({ closeModal }: any) => {
 
   const handleSellRecharge = async () => {
     const loggedInUserId = localStorage.getItem("loggedInUserId");
-
     try {
       const response = await axios.post(
         `${baseUrl}/recruiter/sellRecharge`,
-        { ...payload, adminID: "662e8a352d8e8c17e797303f", id: loggedInUserId },
+        { ...payload, id: loggedInUserId },
         {
           headers: {
             "Content-Type": "application/json",
@@ -30,7 +30,7 @@ const SellRecharge = ({ closeModal }: any) => {
       );
       toast.success(response.data.message);
       closeModal();
-      //   window.location.reload();
+      window.location.reload();
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.error || error.response.data.message);
@@ -43,7 +43,7 @@ const SellRecharge = ({ closeModal }: any) => {
       <form className="">
         <div>
           <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-            FullName
+            Full Name
           </label>
           <input
             onChange={handleChange1}
@@ -53,14 +53,17 @@ const SellRecharge = ({ closeModal }: any) => {
             type="text"
             placeholder="enter full name"
           />
+          {payload.fullName.length < 3 && (
+            <p className="text-red-800 font-normal">
+              full name is required and must be atleast 3 char
+            </p>
+          )}
         </div>
-        <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-          Enter Coin
-        </label>
-        <div className="relative">
-          <div className="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
-            <GiTwoCoins size="28" className="dark:text-black" />
-          </div>
+
+        <div className="">
+          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
+            Enter Coin
+          </label>
           <input
             type="number"
             name="coin"
@@ -69,11 +72,56 @@ const SellRecharge = ({ closeModal }: any) => {
             className="text-xl
                     focus:outline-none
                     [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-                    font-normal border border-gray-300 text-gray-900 rounded-lg block w-full ps-12 p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
+                    font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             placeholder="Enter Coin"
             required
           />
+          {payload.coin == "" && (
+            <p className="text-red-800 font-normal">coin is required</p>
+          )}
         </div>
+
+        <div className="">
+          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
+            Enter phone number
+          </label>
+          <input
+            type="number"
+            name="phoneNumber"
+            aria-describedby="helper-text-explanation"
+            onChange={handleChange1}
+            className="text-xl
+                    focus:outline-none
+                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+                    font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
+            placeholder="Enter phone number"
+            required
+          />
+          {payload.phoneNumber.length < 10 && (
+            <p className="text-red-800 font-normal">
+              phone number is required and muust be 10 digit
+            </p>
+          )}
+        </div>
+
+        <div className="">
+          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
+            Amount
+          </label>
+          <input
+            type="number"
+            aria-describedby="helper-text-explanation"
+            className="text-xl
+                    focus:outline-none
+                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+                    font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
+            placeholder="Enter phone number"
+            required
+            disabled
+            value={(+payload.coin * CoinValue).toFixed(2)}
+          />
+        </div>
+
         <div>
           <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
             YohoID
@@ -86,6 +134,9 @@ const SellRecharge = ({ closeModal }: any) => {
             type="text"
             placeholder="enter yohoId"
           />
+          {payload.YohoId == "" && (
+            <p className="text-red-800 font-normal">YohoId is required</p>
+          )}
         </div>
       </form>
 
@@ -93,6 +144,12 @@ const SellRecharge = ({ closeModal }: any) => {
         <button
           onClick={handleSellRecharge}
           type="button"
+          disabled={
+            payload.YohoId == "" ||
+            payload.coin == "" ||
+            payload.fullName.length < 3 ||
+            payload.phoneNumber.length < 10
+          }
           className="text-gray-900 border-black bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-black-800 dark:text-black dark:border-black dark:hover:bg-black-700 dark:hover:border-black "
         >
           Recharge
