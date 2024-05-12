@@ -100,10 +100,11 @@ const recruiterSlice = createSlice({
         state.userData = loginData;
       })
 
-      .addCase(recruiterLogin.rejected, (state, action) => {
+      .addCase(recruiterLogin.rejected, (state, action: any) => {
         state.loading = false;
         state.error = action.error.message;
-        console.error("Fetch by ID failed:", action.error.message);
+        console.error("Fetch by ID failed:", action);
+        toast.error(action.payload.message);
       });
   },
 });

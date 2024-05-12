@@ -41,7 +41,7 @@ const WithDraw = ({ closeModal }: any) => {
       );
       toast.success(response.data.message);
       closeModal();
-      // window.location.reload();
+      window.location.reload();
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.error || error.response.data.message);
@@ -87,7 +87,7 @@ const WithDraw = ({ closeModal }: any) => {
           [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
           font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             type="text"
-            placeholder="enter upi id"
+            placeholder="Enter upi id"
           />
           {payload.upiId == "" && (
             <span className="text-red-800 font-normal">upiId is required.</span>
@@ -106,7 +106,7 @@ const WithDraw = ({ closeModal }: any) => {
             type="number"
             disabled
             value={(+payload?.amountToWithDraw * CoinValue).toFixed(2)}
-            placeholder="enter amount"
+            placeholder="Enter amount"
           />
         </div>
       </form>

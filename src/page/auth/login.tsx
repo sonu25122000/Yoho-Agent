@@ -31,18 +31,15 @@ export const Login = () => {
 
   const handleLogin = (data: any) => {
     dispatch(recruiterLogin(data));
+    setTimeout(() => {
+      navigate("/");
+    }, 1500);
   };
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center">
       <div className="max-w-screen-xl m-0 sm:m-10 bg-white sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-5/12 p-6 sm:p-12">
-          <div>
-            <img
-              src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-              className="w-32 mx-auto"
-            />
-          </div>
           <div className="mt-28 flex flex-col items-center">
             <h1 className="text-2xl xl:text-3xl font-extrabold">
               WELCOME TO YOHO
@@ -58,7 +55,7 @@ export const Login = () => {
                   className="w-full
                   [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="number"
-                  placeholder="enter your phone number"
+                  placeholder="Enter your phone number"
                 />
                 <p className="font-Lexend font-medium text-sm text-red-500">
                   {errors.phoneNumber?.message}

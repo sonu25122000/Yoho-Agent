@@ -6,10 +6,9 @@ import { CoinValue } from "../../utils/coinValue";
 
 const SellRecharge = ({ closeModal }: any) => {
   const [payload, setPayload] = useState({
-    fullName: "",
     YohoId: "",
     coin: "",
-    phoneNumber: "",
+    note: "",
   });
   const handleChange1 = (e: any) => {
     const { name, value } = e.target;
@@ -41,28 +40,9 @@ const SellRecharge = ({ closeModal }: any) => {
   return (
     <div>
       <form className="">
-        <div>
-          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-            Full Name
-          </label>
-          <input
-            onChange={handleChange1}
-            name="fullName"
-            className="text-xl
-          font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
-            type="text"
-            placeholder="enter full name"
-          />
-          {payload.fullName.length < 3 && (
-            <p className="text-red-800 font-normal">
-              full name is required and must be atleast 3 char
-            </p>
-          )}
-        </div>
-
         <div className="">
           <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-            Enter Coin
+            Enter Yoho Coin
           </label>
           <input
             type="number"
@@ -78,29 +58,6 @@ const SellRecharge = ({ closeModal }: any) => {
           />
           {payload.coin == "" && (
             <p className="text-red-800 font-normal">coin is required</p>
-          )}
-        </div>
-
-        <div className="">
-          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-            Enter phone number
-          </label>
-          <input
-            type="number"
-            name="phoneNumber"
-            aria-describedby="helper-text-explanation"
-            onChange={handleChange1}
-            className="text-xl
-                    focus:outline-none
-                    [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
-                    font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
-            placeholder="Enter phone number"
-            required
-          />
-          {payload.phoneNumber.length < 10 && (
-            <p className="text-red-800 font-normal">
-              phone number is required and muust be 10 digit
-            </p>
           )}
         </div>
 
@@ -132,7 +89,24 @@ const SellRecharge = ({ closeModal }: any) => {
             className="text-xl
           font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             type="text"
-            placeholder="enter yohoId"
+            placeholder="Enter yohoId"
+          />
+          {payload.YohoId == "" && (
+            <p className="text-red-800 font-normal">YohoId is required</p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
+            Note
+          </label>
+          <input
+            onChange={handleChange1}
+            name="note"
+            className="text-xl
+          font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
+            type="text"
+            placeholder="Enter note"
           />
           {payload.YohoId == "" && (
             <p className="text-red-800 font-normal">YohoId is required</p>
@@ -144,12 +118,7 @@ const SellRecharge = ({ closeModal }: any) => {
         <button
           onClick={handleSellRecharge}
           type="button"
-          disabled={
-            payload.YohoId == "" ||
-            payload.coin == "" ||
-            payload.fullName.length < 3 ||
-            payload.phoneNumber.length < 10
-          }
+          disabled={payload.YohoId == "" || payload.coin == ""}
           className="text-gray-900 border-black bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-black-800 dark:text-black dark:border-black dark:hover:bg-black-700 dark:hover:border-black "
         >
           Recharge

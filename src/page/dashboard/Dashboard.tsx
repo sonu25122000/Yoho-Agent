@@ -10,13 +10,14 @@ import { RechargeHistoryCard } from "../../component/card/rechargeHistoryCard";
 import Recharge from "../../component/recharge/Recharge";
 import { DashBoardCard } from "../../component/card/Card";
 import { GiTwoCoins } from "react-icons/gi";
-import { FaUser } from "react-icons/fa";
 import PageHeader from "../../component/pageHeader/PageHeader";
 import SellRecharge from "../../component/recharge/SellRecharge";
 import Modal1 from "../../component/modal/Modal1";
 import { CoinValue } from "../../utils/coinValue";
 import WithDrawCommission from "../../component/modal/withdrawModal";
 import WithDraw from "../../component/recharge/Withdraw";
+import { MdOutlineCurrencyRupee } from "react-icons/md";
+import { QuikRechargeCard } from "../../component/card/QuikRechargeCard";
 
 const DashBoard: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -114,7 +115,7 @@ const DashBoard: React.FC = () => {
             handleOpenModal1={openModal1}
             buttonContent1="Recharge to customer"
             heading="My Coin"
-            coin={(recruiterProfile && recruiterProfile.coin) || "No Coin"}
+            coin={(recruiterProfile && recruiterProfile.coin) || "0"}
           />
           {isModalOpen && (
             <Modal
@@ -137,8 +138,10 @@ const DashBoard: React.FC = () => {
           )}
         </div>
         <DashBoardCard
-          Icon1={<SiSololearn size="40" className="dark:text-white" />}
-          icon={<SiSololearn size="20" />}
+          Icon1={
+            <MdOutlineCurrencyRupee size="40" className="dark:text-white" />
+          }
+          icon={<GiTwoCoins size="20" />}
           coin={
             (recruiterProfile &&
               recruiterProfile.totalCommissionEarned &&
@@ -148,13 +151,15 @@ const DashBoard: React.FC = () => {
                   2
                 ) +
                 " Rs") ||
-            "No Commission Earned"
+            "0"
           }
           heading="Commision Earned"
         />
         <DashBoardCard
-          Icon1={<SiSololearn size="40" className="dark:text-white" />}
-          icon={<SiSololearn size="20" />}
+          Icon1={
+            <MdOutlineCurrencyRupee size="40" className="dark:text-white" />
+          }
+          icon={<GiTwoCoins size="20" />}
           buttonContent="Withdraw"
           handleOpenModal={openModal2}
           coin={
@@ -164,7 +169,7 @@ const DashBoard: React.FC = () => {
                 " = " +
                 (recruiterProfile.unlockCommission * CoinValue).toFixed(2) +
                 " Rs") ||
-            "No unlocked commission"
+            "0"
           }
           heading="Commision Unlocked"
         />

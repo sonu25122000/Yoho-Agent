@@ -5,6 +5,7 @@ import Loader from "./utils/Loader";
 import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./page/dashboard/Dashboard";
 import { HistoryTable } from "./page/history/History";
+import { QuikRechargeCard } from "./component/card/QuikRechargeCard";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const { pathname } = useLocation();
@@ -33,6 +34,7 @@ function App() {
 
         <Route path="/auth/sign-in" element={<Login />} />
         <Route path="/history" element={<HistoryTable />} />
+        <Route path="/quik-recharge" element={<QuikRechargeCard />} />
       </Routes>
     </>
   );

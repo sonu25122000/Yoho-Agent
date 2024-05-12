@@ -35,7 +35,6 @@ const Recharge = ({ closeModal }: any) => {
         {
           ...payload,
           adminID: admin[0]._id,
-          amount: (+payload?.coin * CoinValue).toFixed(3),
         },
         {
           headers: {
@@ -45,7 +44,7 @@ const Recharge = ({ closeModal }: any) => {
       );
       toast.success(response.data.message);
       closeModal();
-      // window.location.reload();
+      window.location.reload();
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.error || error.response.data.message);
@@ -78,7 +77,7 @@ const Recharge = ({ closeModal }: any) => {
         </div>
         <div>
           <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-            mobile number
+            Mobile number
           </label>
           <input
             onChange={handleChange}
@@ -88,7 +87,7 @@ const Recharge = ({ closeModal }: any) => {
           [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
           font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             type="number"
-            placeholder="enter mobile number"
+            placeholder="Enter mobile number"
           />
           {payload.phoneNumber.length < 10 && (
             <span className="text-red-800 font-normal">
@@ -109,7 +108,7 @@ const Recharge = ({ closeModal }: any) => {
             type="number"
             disabled
             value={(+payload?.coin * CoinValue).toFixed(3)}
-            placeholder="enter amount"
+            placeholder="Enter amount"
           />
         </div>
       </form>
