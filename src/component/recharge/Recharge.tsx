@@ -106,7 +106,7 @@ const Recharge = ({ closeModal }: any) => {
           font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             type="number"
             disabled
-            value={(+payload?.coin * CoinValue).toFixed(3)}
+            value={(+payload?.coin * CoinValue).toFixed(2)}
             placeholder="Enter amount"
           />
         </div>

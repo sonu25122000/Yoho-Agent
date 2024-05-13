@@ -9,7 +9,7 @@ import ConfirmQuikRecharge from "./ConfirmModal";
 import Modal from "../modal/ParentModal";
 export const QuikRechargeCard = () => {
   const [isModalOpen1, setIsModalOpen1] = useState(false);
-  const [remark, setRemark] = useState("");
+  const [coin, setCoin] = useState(0);
 
   const openModal1 = () => {
     setIsModalOpen1(true);
@@ -27,14 +27,19 @@ export const QuikRechargeCard = () => {
       console.log(error);
     }
   };
-  const handleQuikRecharge = async (coinValue: number) => {
+
+  const handleCoin = (coinValue: number) => {
+    setCoin(coinValue);
+    openModal1();
+  };
+  const handleQuikRecharge = async () => {
     const loggedInUserId = localStorage.getItem("loggedInUserId");
     try {
       const response = await axios.patch(
         `${baseUrl}/recruiter/recharge/${loggedInUserId}`,
         {
           adminID: admin[0]._id,
-          coin: coinValue,
+          coin: coin,
         },
         {
           headers: {
@@ -69,8 +74,7 @@ export const QuikRechargeCard = () => {
             <div className="card-content">
               <p className="card-title">Coin : {card.label}</p>
               <button
-                // onClick={() => handleQuikRecharge(card.coinValue)}
-                onClick={openModal1}
+                onClick={() => handleCoin(card.coinValue)}
                 className="card-para text-black capitalize"
               >
                 Quik recharge
@@ -83,11 +87,8 @@ export const QuikRechargeCard = () => {
                 >
                   <ConfirmQuikRecharge
                     closeModal={closeModal1}
-                    confirmQuikRecharge={() =>
-                      handleQuikRecharge(card.coinValue)
-                    }
-                    remark={remark}
-                    setRemark={setRemark}
+                    confirmQuikRecharge={handleQuikRecharge}
+                    coin={coin}
                   />
                 </Modal>
               )}

@@ -1,6 +1,11 @@
 import { PiSealWarningFill } from "react-icons/pi";
+import { CoinValue } from "../../utils/coinValue";
 
-const ConfirmQuikRecharge = ({ closeModal, confirmQuikRecharge }: any) => {
+const ConfirmQuikRecharge = ({
+  closeModal,
+  confirmQuikRecharge,
+  coin,
+}: any) => {
   return (
     <div>
       <div className="flex justify-center mb-2 items-center">
@@ -8,6 +13,18 @@ const ConfirmQuikRecharge = ({ closeModal, confirmQuikRecharge }: any) => {
       </div>
       <div className="flex justify-center items-center">
         <h1 className=" text-red-600 font-bold text-3xl">Are You Sure !</h1>
+      </div>
+      <div className="flex gap-5">
+        <p className=" text-black font-bold text-2xl ">coin</p>
+        <span className="text-blue-gray-400 font-semibold text-2xl">
+          {coin || "--"}
+        </span>
+      </div>
+      <div className="flex gap-5">
+        <p className=" text-black font-bold text-2xl ">Amount</p>
+        <span className="text-blue-gray-400 font-semibold text-2xl">
+          {(coin * CoinValue).toFixed(2) || "--"}
+        </span>
       </div>
 
       <div className="flex gap-4 items-center mt-6 space-x-4 flex-row-reverse">
