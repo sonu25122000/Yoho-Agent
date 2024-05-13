@@ -3,10 +3,10 @@ import { RootState } from "../../store";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import request from "axios";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { baseUrl } from "../../utils/baseUrl";
 
-export const USERS_URL = "http://localhost:5000/api/recruiter";
+export const USERS_URL = `${baseUrl}/recruiter`;
 
 type INITIAL_STATE = {
   userData: any;
