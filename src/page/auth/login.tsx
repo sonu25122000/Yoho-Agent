@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHook";
-import {
-  RecruiterData,
-  recruiterLogin,
-} from "../../redux/recruiter/recruiterSlice";
+import { useEffect } from "react";
+import { useAppDispatch } from "../../hooks/reduxHook";
+import { recruiterLogin } from "../../redux/recruiter/recruiterSlice";
 import { useForm } from "react-hook-form";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";

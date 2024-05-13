@@ -4,7 +4,7 @@ import { Login } from "./page/auth/login";
 import Loader from "./utils/Loader";
 import PrivateRoute from "./utils/PrivateRoute";
 import Dashboard from "./page/dashboard/Dashboard";
-import { HistoryTable } from "./page/history/History";
+import { HistoryTable } from "./page/history/history";
 import { QuikRechargeCard } from "./component/card/QuikRechargeCard";
 function App() {
   const [loading, setLoading] = useState<boolean>(true);

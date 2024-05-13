@@ -1,18 +1,11 @@
-import axios from "axios";
-import { FaBitcoin } from "react-icons/fa";
-import { baseUrl } from "../../utils/baseUrl";
-import { toast } from "react-toastify";
 import { GiTwoCoins } from "react-icons/gi";
 import { destructureDate } from "./getTime";
 export function RechargeHistoryCard({
-  id,
   name,
   phoneNumber,
   amount,
   coin,
   purchaseDate,
-  adminID,
-  recruiterID,
 }: any) {
   // get the time and date
   const time = destructureDate(new Date(purchaseDate));

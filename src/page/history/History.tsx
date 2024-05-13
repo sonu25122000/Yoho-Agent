@@ -60,7 +60,7 @@ export function HistoryTable() {
   return (
     <DefaultLayout>
       <Card className="h-full w-full dark:bg-[#23303f] md:px-5">
-        <CardBody className="overflow-scroll ">
+        <CardBody className="overflow-scroll " placeholder={undefined}>
           <table className="mt-4 w-full min-w-max table-auto text-left">
             <thead>
               <tr>

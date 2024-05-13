@@ -5,9 +5,7 @@ import "./card.css";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { baseUrl } from "../../utils/baseUrl";
-import { CoinValue } from "../../utils/coinValue";
 export const QuikRechargeCard = () => {
-  const [coin, setCoin] = useState(1000000);
   const [admin, setAdmin] = useState<any>([]);
   const getAdminDetails = async () => {
     try {
@@ -46,47 +44,6 @@ export const QuikRechargeCard = () => {
   return (
     <DefaultLayout>
       <PageHeader pageName="Quick Recharge" />
-
-      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
-        <div className="card">
-          <div className="card-content">
-            <p className="card-title">Coin : 10 L</p>
-            <button
-              onClick={handleQuikRecharge}
-              className="card-para text-black capitalize"
-            >
-              Quik recharge
-            </button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-content">
-            <p className="card-title">Coin : 30 L</p>
-            <button className="card-para text-black capitalize">
-              Quik recharge
-            </button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-content">
-            <p className="card-title">Coin : 50 L</p>
-            <button className="card-para text-black capitalize">
-              Quik recharge
-            </button>
-          </div>
-        </div>
-
-        <div className="card">
-          <div className="card-content">
-            <p className="card-title">Coin : 1 Cr</p>
-            <button className="card-para text-black capitalize">
-              Quik recharge
-            </button>
-          </div>
-        </div>
-      </div> */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 ">
         {[
           { coinValue: 10000000, label: "10 L" },

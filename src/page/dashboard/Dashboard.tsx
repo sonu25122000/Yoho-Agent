@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import DefaultLayout from "../../layout/DefaultLayout";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { SiSololearn } from "react-icons/si";
 
 import { baseUrl } from "../../utils/baseUrl";
 import Modal from "../../component/modal/ParentModal";
@@ -17,7 +16,6 @@ import { CoinValue } from "../../utils/coinValue";
 import WithDrawCommission from "../../component/modal/withdrawModal";
 import WithDraw from "../../component/recharge/Withdraw";
 import { MdOutlineCurrencyRupee } from "react-icons/md";
-import { QuikRechargeCard } from "../../component/card/QuikRechargeCard";
 
 const DashBoard: React.FC = () => {
   const token = localStorage.getItem("token");

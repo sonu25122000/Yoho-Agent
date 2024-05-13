@@ -1,4 +1,3 @@
-import { GiTwoCoins } from "react-icons/gi";
 import { baseUrl } from "../../utils/baseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";

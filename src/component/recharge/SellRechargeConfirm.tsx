@@ -1,5 +1,3 @@
-import React from "react";
-
 const SellRechargeConfirm = ({ closeModal, confirmRecharge, data }: any) => {
   return (
     <div>

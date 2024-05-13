@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { RiFolderHistoryLine } from "react-icons/ri";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { MdCancel } from "react-icons/md";
 import { GiSplitCross } from "react-icons/gi";
 
 interface SidebarProps {
@@ -18,7 +17,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const sidebar = useRef<any>(null);
 
   const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
-  const [sidebarExpanded, setSidebarExpanded] = useState(
+  const [sidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
 

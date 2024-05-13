@@ -4,6 +4,8 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store.ts";
+import "jsvectormap/dist/css/jsvectormap.css";
+import "flatpickr/dist/flatpickr.min.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>

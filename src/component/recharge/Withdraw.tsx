@@ -1,4 +1,3 @@
-import { GiTwoCoins } from "react-icons/gi";
 import { baseUrl } from "../../utils/baseUrl";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -9,7 +8,6 @@ const WithDraw = ({ closeModal }: any) => {
     amountToWithDraw: "",
     upiId: "",
   });
-  const [admin, setAdmin] = useState<any>([]);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setPayload({ ...payload, [name]: value });
@@ -17,8 +15,7 @@ const WithDraw = ({ closeModal }: any) => {
 
   const getAdminDetails = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/superAdmin`);
-      setAdmin(res.data.data);
+      await axios.get(`${baseUrl}/superAdmin`);
     } catch (error) {
       console.log(error);
     }
