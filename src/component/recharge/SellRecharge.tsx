@@ -3,6 +3,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { CoinValue } from "../../utils/coinValue";
+import Modal1 from "../modal/Modal1";
+import SellRechargeConfirm from "./SellRechargeConfirm";
 
 const SellRecharge = ({ closeModal }: any) => {
   const [payload, setPayload] = useState({
@@ -10,6 +12,14 @@ const SellRecharge = ({ closeModal }: any) => {
     coin: "",
     note: "",
   });
+  const [isModalOpen1, setIsModalOpen1] = useState(false);
+  const openModal1 = () => {
+    setIsModalOpen1(true);
+  };
+
+  const closeModal1 = () => {
+    setIsModalOpen1(false);
+  };
   const handleChange1 = (e: any) => {
     const { name, value } = e.target;
     setPayload({ ...payload, [name]: value });
@@ -108,21 +118,34 @@ const SellRecharge = ({ closeModal }: any) => {
             type="text"
             placeholder="Enter note"
           />
-          {payload.YohoId == "" && (
-            <p className="text-red-800 font-normal">YohoId is required</p>
-          )}
         </div>
       </form>
 
       <div className="flex gap-3 mt-3 flex-row-reverse">
         <button
-          onClick={handleSellRecharge}
+          onClick={openModal1}
           type="button"
           disabled={payload.YohoId == "" || payload.coin == ""}
           className="text-gray-900 border-black bg-white border border-gray-300 focus:outline-none hover:bg-gray-100  focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-black-800 dark:text-black dark:border-black dark:hover:bg-black-700 dark:hover:border-black "
         >
           Recharge
         </button>
+        {isModalOpen1 && (
+          <Modal1
+            closeModal={closeModal1}
+            handleOpen={openModal1}
+            isModalOpen={isModalOpen1}
+          >
+            <SellRechargeConfirm
+              closeModal={closeModal1}
+              confirmRecharge={handleSellRecharge}
+              data={{
+                ...payload,
+                amount: (+payload.coin * CoinValue).toFixed(2),
+              }}
+            />
+          </Modal1>
+        )}
         <button
           onClick={closeModal}
           type="button"
