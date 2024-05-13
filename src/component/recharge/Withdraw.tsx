@@ -7,10 +7,27 @@ const WithDraw = ({ closeModal }: any) => {
   const [payload, setPayload] = useState({
     amountToWithDraw: "",
     upiId: "",
+    amount: "",
   });
+  console.log(payload);
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setPayload({ ...payload, [name]: value });
+  };
+  const handleCoinChange = (e: any) => {
+    const { name, value } = e.target;
+    // Calculate amount based on entered coin and CoinValue
+    const calculatedAmount = +(+value * CoinValue).toFixed(2);
+    const amount = calculatedAmount > 0 ? calculatedAmount.toString() : "";
+    setPayload({ ...payload, [name]: value, amount });
+  };
+  const handleAmountChange = (e: any) => {
+    const { name, value } = e.target;
+    // Calculate coin based on entered amount and CoinValue
+    const calculatedCoin = +(+value / CoinValue).toFixed(2);
+    const amountToWithDraw =
+      calculatedCoin > 0 ? calculatedCoin.toString() : "";
+    setPayload({ ...payload, amountToWithDraw, [name]: value });
   };
 
   const getAdminDetails = async () => {
@@ -60,16 +77,17 @@ const WithDraw = ({ closeModal }: any) => {
             type="number"
             name="amountToWithDraw"
             aria-describedby="helper-text-explanation"
-            onChange={handleChange}
+            onChange={handleCoinChange}
             className="text-xl
                     focus:outline-none
                     [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
                     font-normal border border-gray-300 text-gray-900 rounded-lg block w-full  p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             placeholder="Enter Coin"
             required
+            value={payload.amountToWithDraw}
           />
           {!payload.amountToWithDraw && (
-            <p className="text-red-800 font-normal">enter coin </p>
+            <p className="text-red-800 font-normal">Coin is required </p>
           )}
         </div>
         <div>
@@ -87,7 +105,7 @@ const WithDraw = ({ closeModal }: any) => {
             placeholder="Enter upi id"
           />
           {payload.upiId == "" && (
-            <span className="text-red-800 font-normal">upiId is required.</span>
+            <span className="text-red-800 font-normal">UpiId is required.</span>
           )}
         </div>
 
@@ -101,10 +119,18 @@ const WithDraw = ({ closeModal }: any) => {
           [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
           font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
             type="number"
-            disabled
-            value={(+payload?.amountToWithDraw * CoinValue).toFixed(2)}
+            // disabled
+            // value={(+payload?.amountToWithDraw * CoinValue).toFixed(2)}
+            onChange={handleAmountChange}
+            name="amount"
+            value={payload.amount}
             placeholder="Enter amount"
           />
+          {payload.amount == "" && (
+            <span className="text-red-800 font-normal">
+              Amount is required.
+            </span>
+          )}
         </div>
       </form>
       <div className="flex gap-3 mt-3 flex-row-reverse">

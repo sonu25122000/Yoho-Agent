@@ -11,7 +11,23 @@ const SellRecharge = ({ closeModal }: any) => {
     YohoId: "",
     coin: "",
     note: "",
+    amount: "",
   });
+  const handleCoinChange = (e: any) => {
+    const { name, value } = e.target;
+    // Calculate amount based on entered coin and CoinValue
+    const calculatedAmount = +(+value * CoinValue).toFixed(2);
+    const amount = calculatedAmount > 0 ? calculatedAmount.toString() : "";
+    setPayload({ ...payload, [name]: value, amount });
+  };
+
+  const handleAmountChange = (e: any) => {
+    const { name, value } = e.target;
+    // Calculate coin based on entered amount and CoinValue
+    const calculatedCoin = +(+value / CoinValue).toFixed(2);
+    const coin = calculatedCoin > 0 ? calculatedCoin.toString() : "";
+    setPayload({ ...payload, coin, [name]: value });
+  };
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const openModal1 = () => {
     setIsModalOpen1(true);
@@ -50,6 +66,22 @@ const SellRecharge = ({ closeModal }: any) => {
   return (
     <div>
       <form className="">
+        <div>
+          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
+            YohoID
+          </label>
+          <input
+            onChange={handleChange1}
+            name="YohoId"
+            className="text-xl
+          font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
+            type="text"
+            placeholder="Enter yohoId"
+          />
+          {payload.YohoId == "" && (
+            <p className="text-red-800 font-normal">YohoId is required</p>
+          )}
+        </div>
         <div className="">
           <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
             Enter Yoho Coin
@@ -57,8 +89,9 @@ const SellRecharge = ({ closeModal }: any) => {
           <input
             type="number"
             name="coin"
+            value={payload.coin}
             aria-describedby="helper-text-explanation"
-            onChange={handleChange1}
+            onChange={handleCoinChange}
             className="text-xl
                     focus:outline-none
                     [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
@@ -77,32 +110,19 @@ const SellRecharge = ({ closeModal }: any) => {
           </label>
           <input
             type="number"
+            onChange={handleAmountChange}
+            name="amount"
             aria-describedby="helper-text-explanation"
             className="text-xl
                     focus:outline-none
                     [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
                     font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
-            placeholder="Enter phone number"
+            placeholder="Enter Amount"
             required
-            disabled
-            value={(+payload.coin * CoinValue).toFixed(2)}
+            value={payload.amount}
           />
-        </div>
-
-        <div>
-          <label className="block text-xl mb-2 font-semibold text-gray-900 dark:text-black">
-            YohoID
-          </label>
-          <input
-            onChange={handleChange1}
-            name="YohoId"
-            className="text-xl
-          font-normal border border-gray-300 text-gray-900 rounded-lg block w-full p-2.5  dark:bg-black-700 dark:border-black-600 dark:placeholder-black-400 dark:text-black"
-            type="text"
-            placeholder="Enter yohoId"
-          />
-          {payload.YohoId == "" && (
-            <p className="text-red-800 font-normal">YohoId is required</p>
+          {payload.amount == "" && (
+            <p className="text-red-800 font-normal">Amount is required</p>
           )}
         </div>
 
