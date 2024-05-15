@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-// import UserOne from '../../images/user/user-01.png';
+import { RiLockPasswordFill } from "react-icons/ri";
 
 const DropdownUser = () => {
   const navigate = useNavigate();
@@ -73,7 +72,6 @@ const DropdownUser = () => {
           />
         </svg>
       </Link>
-
       <div
         ref={dropdown}
         onFocus={() => setDropdownOpen(true)}
@@ -82,6 +80,13 @@ const DropdownUser = () => {
           dropdownOpen === true ? "block" : "hidden"
         }`}
       >
+        <Link
+          to="/change-password"
+          className="flex items-center text-black gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+        >
+          <RiLockPasswordFill size={"25"} />
+          Change Password
+        </Link>
         <button
           onClick={handleLogout}
           className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"

@@ -5,6 +5,7 @@ const ConfirmQuikRecharge = ({
   closeModal,
   confirmQuikRecharge,
   coin,
+  loading,
 }: any) => {
   return (
     <div>
@@ -14,13 +15,13 @@ const ConfirmQuikRecharge = ({
       <div className="flex justify-center items-center">
         <h1 className=" text-red-600 font-bold text-3xl">Are You Sure !</h1>
       </div>
-      <div className="flex gap-5">
-        <p className=" text-black font-bold text-2xl ">coin</p>
+      <div className="flex justify-between gap-5">
+        <p className=" text-black font-bold text-2xl ">Coin</p>
         <span className="text-blue-gray-400 font-semibold text-2xl">
           {coin || "--"}
         </span>
       </div>
-      <div className="flex gap-5">
+      <div className="flex gap-5 justify-between">
         <p className=" text-black font-bold text-2xl ">Amount</p>
         <span className="text-blue-gray-400 font-semibold text-2xl">
           {(coin * CoinValue).toFixed(2) || "--"}
@@ -34,7 +35,7 @@ const ConfirmQuikRecharge = ({
           className={`
            text-white bg-blue-700 hover:bg-blue-800   font-bold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600`}
         >
-          Confirm
+          {!loading ? "Confirm" : "processing...."}
         </button>
         <button
           onClick={closeModal}

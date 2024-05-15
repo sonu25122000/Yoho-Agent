@@ -70,6 +70,7 @@ const DashBoard: React.FC = () => {
   };
 
   //  get pending recharge history
+
   const getPendingRecharge = async () => {
     try {
       const res = await axios.get(`${baseUrl}/history?status=pending`, {
@@ -79,13 +80,16 @@ const DashBoard: React.FC = () => {
         },
       });
       const buyTypeRecharge = res.data.data.filter(
-        (el: any) => el.purchaseType == "buy"
+        (el: any) =>
+          el.purchaseType == "buy" && el.recruiterID._id == loggedInUserId
       );
       const sellTypeRecharge = res.data.data.filter(
-        (el: any) => el.purchaseType == "sell"
+        (el: any) =>
+          el.purchaseType == "sell" && el.recruiterID._id == loggedInUserId
       );
       const withdrawType = res.data.data.filter(
-        (el: any) => el.purchaseType == "withdraw"
+        (el: any) =>
+          el.purchaseType == "withdraw" && el.recruiterID._id == loggedInUserId
       );
       setRequestedRecharge(buyTypeRecharge);
       setRequestedRechargeSellType(sellTypeRecharge);

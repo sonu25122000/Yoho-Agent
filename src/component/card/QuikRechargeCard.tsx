@@ -10,7 +10,7 @@ import Modal from "../modal/ParentModal";
 export const QuikRechargeCard = () => {
   const [isModalOpen1, setIsModalOpen1] = useState(false);
   const [coin, setCoin] = useState(0);
-
+  const [loading, setLoading] = useState(false);
   const openModal1 = () => {
     setIsModalOpen1(true);
   };
@@ -33,6 +33,7 @@ export const QuikRechargeCard = () => {
     openModal1();
   };
   const handleQuikRecharge = async () => {
+    setLoading(true);
     const loggedInUserId = localStorage.getItem("loggedInUserId");
     try {
       const response = await axios.patch(
@@ -49,10 +50,12 @@ export const QuikRechargeCard = () => {
       );
       toast.success(response.data.message);
       closeModal1();
+      setLoading(false);
     } catch (error: any) {
       console.log(error);
       closeModal1();
       toast.error(error.response.data.error || error.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -89,6 +92,7 @@ export const QuikRechargeCard = () => {
                     closeModal={closeModal1}
                     confirmQuikRecharge={handleQuikRecharge}
                     coin={coin}
+                    loading={loading}
                   />
                 </Modal>
               )}
